@@ -167,12 +167,12 @@ class Scalar:
         assert h.ctx is not None
 
         derivatives = h.last_fn._backward(h.ctx, d_output)
-        
+
         result = []
         for i, (variable, derivative) in enumerate(zip(h.inputs, derivatives)):
             if isinstance(variable, Scalar):
                 result.append((variable, derivative))
-        
+
         return result
 
     def backward(self, d_output: Optional[float] = None) -> None:

@@ -123,7 +123,7 @@ class Inv(ScalarFunction):
     @staticmethod
     def backward(ctx: Context, d_output: float) -> float:
         a, = ctx.saved_values
-        return -d_output / (a * a)
+        return float(-d_output / (a * a))
 
 
 class Neg(ScalarFunction):

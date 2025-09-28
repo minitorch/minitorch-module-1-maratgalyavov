@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Any, Iterable, List, Tuple
+from typing import Any, Iterable, Tuple
 
 from typing_extensions import Protocol
 
@@ -23,16 +23,16 @@ def central_difference(f: Any, *vals: Any, arg: int = 0, epsilon: float = 1e-6) 
         An approximation of $f'_i(x_0, \ldots, x_{n-1})$
     """
     vals_list = list(vals)
-    
+
     vals_plus = vals_list.copy()
     vals_minus = vals_list.copy()
-    
+
     vals_plus[arg] += epsilon
     vals_minus[arg] -= epsilon
-    
+
     f_plus = f(*vals_plus)
     f_minus = f(*vals_minus)
-    
+
     return (f_plus - f_minus) / (2 * epsilon)
 
 
@@ -73,17 +73,17 @@ def topological_sort(variable: Variable) -> Iterable[Variable]:
     """
     visited = set()
     result = []
-    
+
     def dfs(var: Variable) -> None:
         if var.unique_id in visited or var.is_constant():
             return
         visited.add(var.unique_id)
-        
+
         for parent in var.parents:
             dfs(parent)
-        
+
         result.append(var)
-    
+
     dfs(variable)
     return result
 
@@ -100,10 +100,10 @@ def backpropagate(variable: Variable, deriv: Any) -> None:
     No return. Should write to its results to the derivative values of each leaf through `accumulate_derivative`.
     """
     topo_order = topological_sort(variable)
-    
+
     derivatives = {variable.unique_id: deriv}
-    
-    for var in reversed(topo_order):
+
+    for var in reversed(list(topo_order)):
         if var.is_leaf():
             var.accumulate_derivative(derivatives.get(var.unique_id, 0.0))
         else:
