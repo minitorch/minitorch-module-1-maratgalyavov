@@ -131,7 +131,7 @@ class Neg(ScalarFunction):
 
     @staticmethod
     def forward(ctx: Context, a: float) -> float:
-        return operators.neg(a)
+        return float(operators.neg(a))
 
     @staticmethod
     def backward(ctx: Context, d_output: float) -> float:

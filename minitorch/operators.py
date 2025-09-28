@@ -33,19 +33,19 @@ from typing import Callable, Iterable, List
 
 
 def mul(x: float, y: float) -> float:
-    return x * y
+    return float(x * y)
 
 
 def id(x: float) -> float:
-    return x
+    return float(x)
 
 
 def add(x: float, y: float) -> float:
-    return x + y
+    return float(x + y)
 
 
 def neg(x: float) -> float:
-    return -x
+    return float(-x)
 
 
 def lt(x: float, y: float) -> float:
@@ -57,7 +57,7 @@ def eq(x: float, y: float) -> float:
 
 
 def max(x: float, y: float) -> float:
-    return x if x > y else y
+    return float(x if x > y else y)
 
 
 def is_close(x: float, y: float) -> float:
