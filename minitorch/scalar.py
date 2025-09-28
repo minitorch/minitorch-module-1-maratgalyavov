@@ -166,13 +166,10 @@ class Scalar:
         assert h.last_fn is not None
         assert h.ctx is not None
 
-        # Call the backward method of the function with context and d_output
         derivatives = h.last_fn._backward(h.ctx, d_output)
         
-        # Pair derivatives with input variables, filtering out constants
         result = []
         for i, (variable, derivative) in enumerate(zip(h.inputs, derivatives)):
-            # Only include variables that are Scalar objects (not constants)
             if isinstance(variable, Scalar):
                 result.append((variable, derivative))
         
